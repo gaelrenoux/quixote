@@ -17,13 +17,14 @@ val scalatestVersion = "3.0.1"
 val typesafeConfigVersion = "1.3.1"
 val slf4jVersion = "1.7.24"
 val scalaLoggingVersion = "3.4.0" //3.5.0 does not support Scala 2.11 anymore
+val shapelessVersion = "2.3.2"
 
 libraryDependencies ++= Seq(
   "org.scalatest" %% "scalatest" % scalatestVersion % "test",
   "com.typesafe" % "config" % typesafeConfigVersion,
   "org.slf4j" % "slf4j-api" % slf4jVersion,
-  "com.typesafe.scala-logging" %% "scala-logging" % scalaLoggingVersion
-
+  "com.typesafe.scala-logging" %% "scala-logging" % scalaLoggingVersion,
+  "com.chuusai" %% "shapeless" % shapelessVersion
 )
 
 resolvers ++= Seq(

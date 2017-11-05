@@ -9,7 +9,7 @@ import scala.concurrent.Future
 /**
   * @author Gaël Renoux
   */
-class TriggeredRvcTest extends FlatSpec with Matchers with BeforeAndAfterAll with ScalaFutures {
+class ResilientValueCacheTest extends FlatSpec with Matchers with BeforeAndAfterAll with ScalaFutures {
 
   behavior of "Builder"
 
