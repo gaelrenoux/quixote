@@ -1,5 +1,5 @@
 organization := "gaelrenoux"
-name := "quixote"
+name := "quixote-core"
 version := "0.1-SNAPSHOT"
 //maintainer := "Gaël Renoux"
 
