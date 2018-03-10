@@ -2,6 +2,7 @@ package quixote.retry.impl.noRetry
 
 
 import quixote.retry.ConvertsTo
+import quixote.retry._
 
 import scala.concurrent.Future
 

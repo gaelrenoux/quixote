@@ -7,9 +7,10 @@ import scala.concurrent.duration.{Duration, FiniteDuration}
 
 case class Configuration(
                           timeout: FiniteDuration,
-                          retryPeriod: FiniteDuration,
-                          retryPeriodMultiplier: Double,
-                          retryPeriodMax: Duration,
+                          maxAttempts: Long,
+                          retryDelay: FiniteDuration,
+                          retryDelayMultipler: Double,
+                          retryDelayMax: Duration,
                           cache: CacheConfiguration
                         )
 
@@ -42,15 +43,16 @@ object Configuration {
 
     Configuration(
       timeout = getOrDefault[java.time.Duration]("timeout")(_ getDuration),
-      retryPeriod = getOrDefault[java.time.Duration]("retry-period")(_ getDuration),
-      retryPeriodMultiplier = getOrDefault("retry-period-multiplier")(_ getDouble),
-      retryPeriodMax = getOrDefault("retry-period-max") { c => k => if (c.getIsNull(k)) Duration.Inf else c.getDuration(k) },
+      maxAttempts = getOrDefault[Long]("max-attempts")(_ getLong),
+      retryDelay = getOrDefault[java.time.Duration]("retry-delay")(_ getDuration),
+      retryDelayMultipler = getOrDefault("retry-delay-multiplier")(_ getDouble),
+      retryDelayMax = getOrDefault("retry-delay-max") { c => k => if (c.getIsNull(k)) Duration.Inf else c.getDuration(k) },
       cache = CacheConfiguration(
         shortTimeout = getOrDefault("cache.short-timeout") { c => k => if (c.getIsNull(k)) None else Some(c.getDuration(k)) },
         expiration = getOrDefault[java.time.Duration]("cache.expiration")(_ getDuration),
         absoluteExpiration = getOrDefault("cache.absolute-expiration") { c => k => if (c.getIsNull(k)) Duration.Inf else c.getDuration(k) },
         cacheSize = getOrDefault("cache.max-size") { c => k => if (c.getIsNull(k)) None else Some(c.getInt(k)) },
-        autoRefreshPeriodMultiplier = getOrDefault("auto-refresh-period-multiplier") { c => k => if (c.getIsNull(k)) None else Some(c.getDouble(k)) }
+        autoRefreshPeriodMultiplier = getOrDefault("cache.auto-refresh-period-multiplier") { c => k => if (c.getIsNull(k)) None else Some(c.getDouble(k)) }
       )
     )
   }

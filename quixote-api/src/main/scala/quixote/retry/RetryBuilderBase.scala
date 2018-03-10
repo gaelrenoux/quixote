@@ -3,7 +3,7 @@ package quixote.retry
 import quixote.configuration.Configuration
 
 /** Start building a Retry: only the configuration is known right now */
-class RetryBuilderBase(val configuration: Configuration)
+class RetryBuilderBase(val conf: Configuration)
 
 object RetryBuilderBase {
 

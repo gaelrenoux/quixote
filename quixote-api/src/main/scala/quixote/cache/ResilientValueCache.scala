@@ -2,19 +2,17 @@ package quixote.cache
 
 import quixote.configuration.Configuration
 
-import scala.concurrent.Future
+import scala.concurrent.{ExecutionContext, Future}
 import scala.reflect.ClassTag
 
 
 class ResilientValueCache[+A: ClassTag] private(configuration: Configuration)(f: => Future[A]) {
 
   /** Return a cached value. Will fail if the cache cannot return any value. */
-  def get: Future[CachedValue[A]] = ???
-
-
-
-
-
+  def get(implicit ec: ExecutionContext): Future[CachedValue[A]] = {
+    if (configuration.maxAttempts > 0) f.map(LiveValue(_))
+    else f.map(ExpiredValue(_, new UnsupportedOperationException))
+  }
 
 
 
