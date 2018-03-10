@@ -3,23 +3,23 @@
 *.log
 
 # SBT
-build
-dist
-project/boot
-project/project
-project/target
-project/plugins/target
-project/.sbtserver.lock
-project/sbt-ui.sbt
-target
-.target
-.sbtserver
-native/
-native-sigar
+*/build
+*/dist
+*/project/boot
+*/project/project
+*/project/target
+*/project/plugins/target
+*/project/.sbtserver.lock
+*/project/sbt-ui.sbt
+*/target
+*/.target
+*/.sbtserver
+*/native/
+*/native-sigar
 
 # IntelliJ
-/.idea
-/.idea_modules
-/.classpath
-/.project
-/.settings
+*/.idea
+*/.idea_modules
+*/.classpath
+*/.project
+*/.settings
