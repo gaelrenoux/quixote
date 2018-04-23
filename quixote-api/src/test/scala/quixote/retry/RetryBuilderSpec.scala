@@ -108,5 +108,13 @@ class RetryBuilderSpec extends FlatSpec with Matchers with BeforeAndAfterEach wi
 
   }
 
+  retry("testConfig").futureEither {
+    if (true) Future(Right(42)) else Future(Left("8x7"))
+  } onEachFailure {
+    case stuff => log.warn("Something failed : $stuff")
+  } onSuccess { (value, failureCount, duration) =>
+    if (failureCount > 0) log.warn("Things went back to normal")
+  }
+
 }
 
